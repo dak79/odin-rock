@@ -1,10 +1,11 @@
-// Random computer play
+/**
+* This function take a random number and associate it to rock, paper or scissor
+* and return that value as a string
+*/
 function computerPlay(){
 
-    // Generate a random number between 0 and 2
     let ranInt = parseInt(Math.random() * 3);
 
-    // Connect the random number to rock or paper or scissor
     if (ranInt === 0) {
         return 'rock';
     } else if (ranInt == 1) {
@@ -14,17 +15,15 @@ function computerPlay(){
     }
 }
 
-// Player play: input by prompt
+/**
+* This function prompt the user for a value (rock, paper or scissor), validate
+* it, normalize the input string and return the user choice
+*/
 function playerPlay(){
     let answer = '';
 
-    // Validation: only rock, paper, scissor are valid input
     do {
-
-        // Prompt player
         answer = prompt('Choose rock, paper or scissor');
-
-        // Normalize string
         answer = answer.toLowerCase().trim();
 
     } while (answer !== 'rock' && answer !== 'paper' && answer !== 'scissor');
@@ -32,19 +31,24 @@ function playerPlay(){
     return answer;
 }
 
-// One round
+/**
+* This function normalize the inputs from player and computer,
+* play a round of the game and return who win the round (or a tie).
+* @param {string} playerSelection The play from player.
+* @param {string} computerSelection The random play from computer
+* Logic:    scissor > rock > paper
+            paper < rock < scissor
+            rock < scissor > paper
+*/
 function playRound(playerSelection, computerSelection){
 
-    // Normalize strings
     const player = playerSelection.toLowerCase().trim();
     const computer = computerSelection.toLowerCase().trim();
 
-    // Compute a tie
     if (player === computer) {
         return 'tie';
     }
 
-    // Compute a match: scissor > rock > paper, paper < rock < scissor and rock < scissor > paper
     if (player > computer) {
         if (player === 'rock' || computer === 'rock') {
             return 'computer';
@@ -60,22 +64,22 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-// Play a match
+/**
+* This function play a match of five rounds, compute the winning of each round
+* and display it. If there is a tie the round is repeated.
+* After five round compute and displey the winner of the match.
+*/
 function game() {
     let playerWin = 0;
     let computerWin = 0;
 
-    // Play 5 round
     for (let i = 0; i < 5; i++) {
 
-        // Player and computer play
         const playerSelection = playerPlay();
         const computerSelection = computerPlay();
 
-        // Play a round
-        let winner = playRound(playerSelection, computerSelection);
+        const winner = playRound(playerSelection, computerSelection);
 
-        // Compute winnings and display round results
         if (winner === 'player') {
             playerWin++;
             console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
