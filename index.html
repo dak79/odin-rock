@@ -6,19 +6,26 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Rock, Paper and Scissor</title>
         <script src="js/main.js" charset="utf-8" defer></script>
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
-        <button data-play="Rock" class="btn">Rock</button>
-        <button data-play="Paper" class="btn">Paper</button>
-        <button data-play="Scissor" class="btn">Scissor</button>
+        <div id="container">
+            <div id="buttons">
+                <button data-play="Rock" class="btn">Rock</button>
+                <button data-play="Paper" class="btn">Paper</button>
+                <button data-play="Scissor" class="btn">Scissor</button>
+            </div>
 
-        <div id="round">Round: <span id="round-winner"></span> </div>
-        <div id="score">
-            Score: Player <span id="player-score">0</span> - Computer <span id="computer-score">0</span>
+            <div id="round">
+                Round: <span id="round-winner"></span>
+            </div>
+            <div id="score">
+                Score: Player <span id="player-score">0</span> - Computer <span id="computer-score">0</span>
+            </div>
+            <div id="final"></div>
+            <div id="reload"></div>
         </div>
-        <div id="final"></div>
-        <div id="reload"></div>
 
     </body>
 </html>

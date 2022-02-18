@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 70vh;
+}
+
+div#buttons {
+    margin-bottom: 2em;
+}
+
+div#round {
+    margin-bottom: 2em;
+}
+
+div#score {
+    margin-bottom: 2em;
+}
+
+div#final {
+    margin-bottom: 2em;
+}

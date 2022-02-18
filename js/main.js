@@ -29,24 +29,24 @@ function playRound(player, computer){
     result.textContent = '';
 
     if (player === computer) {
-        result.textContent = `${player} - ${computer}. This is a tie`
+        result.textContent = `Computer plays ${computer}. This is a tie`
         return 'tie';
     }
 
     if (player > computer) {
         if (player === 'Rock' || computer === 'Rock') {
-            result.textContent = `${player} - ${computer}. Computer won the round`;
+            result.textContent = `Computer plays ${computer}. You lost the round`;
             return 'computer';
         } else {
-            result.textContent = `${player} - ${computer}. Player won the round`;
+            result.textContent = `Computer plays ${computer}. You won the round`;
             return 'player';
         }
     } else {
         if (player === 'Rock' || computer === 'Rock') {
-            result.textContent = `${player} - ${computer}. Player won the round`;
+            result.textContent = `Computer plays ${computer}. You won the round`;
             return 'player';
         } else {
-            result.textContent = `${player} - ${computer}. Computer won the round`;
+            result.textContent = `Computer plays ${computer}. You lost the round`;
             return 'computer';
         }
     }
@@ -97,14 +97,13 @@ function game(){
 * @param {integer} plyScore - Final player score.
 * @param {integer} cpuScore - Final computer score.
 */
-
 function finalScore(plyScore, cpuScore) {
     const final = document.querySelector('#final');
     const reload = document.querySelector('#reload');
 
     // Congrats to the winner
     if (plyScore > cpuScore) {
-        final.textContent = 'Player win the game';
+        final.textContent = 'You win the game';
     } else {
         final.textContent = 'Computer win the game';
     }
