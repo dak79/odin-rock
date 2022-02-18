@@ -7,28 +7,28 @@ function computerPlay(){
     let ranInt = parseInt(Math.random() * 3);
 
     if (ranInt === 0) {
-        return 'rock';
+        return 'Rock';
     } else if (ranInt == 1) {
-        return 'paper';
+        return 'Paper';
     } else {
-        return 'scissor';
+        return 'Scissor';
     }
 }
 
 /**
-* This function prompt the user for a value (rock, paper or scissor), validate
-* it, normalize the input string and return the user choice
+* This function let the player select the play and call playRound with
+* player selection and computer random selection.
 */
 function playerPlay(){
-    let answer = '';
 
-    do {
-        answer = prompt('Choose rock, paper or scissor');
-        answer = answer.toLowerCase().trim();
+    const buttons = document.querySelectorAll('.btn');
 
-    } while (answer !== 'rock' && answer !== 'paper' && answer !== 'scissor');
-
-    return answer;
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const computer = computerPlay();
+            playRound(button.dataset.play, computer);
+        });
+    });
 }
 
 /**
@@ -40,25 +40,29 @@ function playerPlay(){
             paper < rock < scissor
             rock < scissor > paper
 */
-function playRound(playerSelection, computerSelection){
-
-    const player = playerSelection.toLowerCase().trim();
-    const computer = computerSelection.toLowerCase().trim();
+function playRound(player, computer){
+    const result = document.querySelector('#round-winner');
+    result.textContent = '';
 
     if (player === computer) {
+        result.textContent = `${player} - ${computer}. This is a tie`
         return 'tie';
     }
 
     if (player > computer) {
         if (player === 'rock' || computer === 'rock') {
+            result.textContent = `${player} - ${computer}. Computer won the round`;
             return 'computer';
         } else {
+            result.textContent = `${player} - ${computer}. Player won the round`;
             return 'player';
         }
     } else {
         if (player === 'rock' || computer === 'rock') {
+            result.textContent = `${player} - ${computer}. Player won the round`;
             return 'player';
         } else {
+            result.textContent = `${player} - ${computer}. Computer won the round`;
             return 'computer';
         }
     }
@@ -73,31 +77,31 @@ function game() {
     let playerWin = 0;
     let computerWin = 0;
 
-    for (let i = 0; i < 5; i++) {
-
-        const playerSelection = playerPlay();
-        const computerSelection = computerPlay();
-
-        const winner = playRound(playerSelection, computerSelection);
-
-        if (winner === 'player') {
-            playerWin++;
-            console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-        } else if (winner === 'computer') {
-            computerWin++;
-            console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-        } else {
-            i--;
-            console.log('It\'s a tie. Play again this round');
-        }
-    }
-
-    // Display the final score
-    if (playerWin > computerWin) {
-        console.log(`You Win the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+while (playerWin < 5) {
+    if (winner === 'player') {
+        playerWin++;
+        const playerScore = document.querySelector('#player-score');
+        playerScore.textContent = playerWin;
+        console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
+    } else if (winner === 'computer') {
+        computerWin++;
+        console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
     } else {
-        console.log(`You Lose the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+        console.log('It\'s a tie. Play again this round');
     }
+
 }
 
-game();
+
+
+
+
+    // // Display the final score
+    // if (playerWin > computerWin) {
+    //     console.log(`You Win the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+    // } else {
+    //     console.log(`You Lose the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+    // }
+}
+
+playerPlay()
