@@ -22,11 +22,31 @@ function computerPlay(){
 function playerPlay(){
 
     const buttons = document.querySelectorAll('.btn');
+    let playerWin = 0;
+    let computerWin = 0;
+
+    const playerScore = document.querySelector('#player-score');
+    const computerScore = document.querySelector('#computer-score');
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const computer = computerPlay();
-            playRound(button.dataset.play, computer);
+            const winner = playRound(button.dataset.play, computer);
+            console.log(winner);
+
+            if (winner === 'player') {
+                playerWin++;
+                playerScore.textContent = playerWin;
+                console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
+                } else if (winner === 'computer') {
+                    computerWin++;
+                    computerScore.textContent = computerWin;
+                    console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
+                }
+                // else {
+                //
+                //     console.log('It\'s a tie. Play again this round');
+                // }
         });
     });
 }
@@ -77,25 +97,29 @@ function game() {
     let playerWin = 0;
     let computerWin = 0;
 
-while (playerWin < 5) {
-    if (winner === 'player') {
+    for(let i = 0; i <5; i++) {
+        const winner = playerPlay();
         playerWin++;
-        const playerScore = document.querySelector('#player-score');
-        playerScore.textContent = playerWin;
-        console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-    } else if (winner === 'computer') {
-        computerWin++;
-        console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-    } else {
-        console.log('It\'s a tie. Play again this round');
+        console.log(winner);
+
     }
 
-}
-
-
-
-
-
+            // for (let i = 0; i < 5; i++) {
+    //
+    //     const winner = playerPlay();
+    //
+    //     if (winner === 'player') {
+    //         playerWin++;
+    //         console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
+    //     } else if (winner === 'computer') {
+    //         computerWin++;
+    //         console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
+    //     } else {
+    //         i--;
+    //         console.log('It\'s a tie. Play again this round');
+    //     }
+    // }
+    //
     // // Display the final score
     // if (playerWin > computerWin) {
     //     console.log(`You Win the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
@@ -104,4 +128,4 @@ while (playerWin < 5) {
     // }
 }
 
-playerPlay()
+playerPlay();
