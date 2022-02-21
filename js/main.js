@@ -104,14 +104,17 @@ function finalScore(plyScore, cpuScore) {
     // Congrats to the winner
     if (plyScore > cpuScore) {
         final.textContent = 'You win the game';
+        final.classList.add('player-win');
     } else {
         final.textContent = 'Computer win the game';
+        final.classList.add('computer-win');
     }
 
     // Play again possibility
     const btnReload = document.createElement('button');
     btnReload.textContent = 'Play Again';
     btnReload.setAttribute('id', 'reload');
+    btnReload.classList.add('btn-reload');
 
     reload.appendChild(btnReload);
 
