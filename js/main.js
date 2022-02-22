@@ -7,28 +7,12 @@ function computerPlay(){
     let ranInt = parseInt(Math.random() * 3);
 
     if (ranInt === 0) {
-        return 'rock';
+        return 'Rock';
     } else if (ranInt == 1) {
-        return 'paper';
+        return 'Paper';
     } else {
-        return 'scissor';
+        return 'Scissor';
     }
-}
-
-/**
-* This function prompt the user for a value (rock, paper or scissor), validate
-* it, normalize the input string and return the user choice
-*/
-function playerPlay(){
-    let answer = '';
-
-    do {
-        answer = prompt('Choose rock, paper or scissor');
-        answer = answer.toLowerCase().trim();
-
-    } while (answer !== 'rock' && answer !== 'paper' && answer !== 'scissor');
-
-    return answer;
 }
 
 /**
@@ -40,64 +24,103 @@ function playerPlay(){
             paper < rock < scissor
             rock < scissor > paper
 */
-function playRound(playerSelection, computerSelection){
-
-    const player = playerSelection.toLowerCase().trim();
-    const computer = computerSelection.toLowerCase().trim();
+function playRound(player, computer){
+    const result = document.querySelector('#round-winner');
+    result.textContent = '';
 
     if (player === computer) {
+        result.textContent = `Computer plays ${computer}. This is a tie`
         return 'tie';
     }
 
     if (player > computer) {
-        if (player === 'rock' || computer === 'rock') {
+        if (player === 'Rock' || computer === 'Rock') {
+            result.textContent = `Computer plays ${computer}. You lost the round`;
             return 'computer';
         } else {
+            result.textContent = `Computer plays ${computer}. You won the round`;
             return 'player';
         }
     } else {
-        if (player === 'rock' || computer === 'rock') {
+        if (player === 'Rock' || computer === 'Rock') {
+            result.textContent = `Computer plays ${computer}. You won the round`;
             return 'player';
         } else {
+            result.textContent = `Computer plays ${computer}. You lost the round`;
             return 'computer';
         }
     }
 }
 
 /**
-* This function play a match of five rounds, compute the winning of each round
-* and display it. If there is a tie the round is repeated.
-* After five round compute and displey the winner of the match.
+* This function play a match: the first who arrive to 5 win.
 */
-function game() {
+function game(){
+
+    const buttons = document.querySelectorAll('.btn');
     let playerWin = 0;
     let computerWin = 0;
 
-    for (let i = 0; i < 5; i++) {
+    const playerScore = document.querySelector('#player-score');
+    const computerScore = document.querySelector('#computer-score');
 
-        const playerSelection = playerPlay();
-        const computerSelection = computerPlay();
+    // Play a round with cpu random selection and user selection.
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const computer = computerPlay();
+            const winner = playRound(button.dataset.play, computer);
 
-        const winner = playRound(playerSelection, computerSelection);
+            // Increase the score of winner
+            if (winner === 'player') {
+                playerWin++;
+                playerScore.textContent = playerWin;
+            }
 
-        if (winner === 'player') {
-            playerWin++;
-            console.log(`You Win the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-        } else if (winner === 'computer') {
-            computerWin++;
-            console.log(`You Lose the Round! Player: ${playerWin} - Computer: ${computerWin}`);
-        } else {
-            i--;
-            console.log('It\'s a tie. Play again this round');
-        }
-    }
+            if (winner === 'computer') {
+                computerWin++;
+                computerScore.textContent = computerWin;
+            }
 
-    // Display the final score
-    if (playerWin > computerWin) {
-        console.log(`You Win the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+            // Declare match winner and close the match
+            if (playerWin === 5 || computerWin === 5){
+                finalScore(playerWin, computerWin);
+                buttons.forEach(button => {
+                    button.setAttribute('disabled', true);
+                })
+            }
+        });
+    });
+}
+
+/**
+* This function show the winner and give the possibility to play again.
+* @param {integer} plyScore - Final player score.
+* @param {integer} cpuScore - Final computer score.
+*/
+function finalScore(plyScore, cpuScore) {
+    const final = document.querySelector('#final');
+    const reload = document.querySelector('#reload');
+
+    // Congrats to the winner
+    if (plyScore > cpuScore) {
+        final.textContent = 'You win the game';
+        final.classList.add('player-win');
     } else {
-        console.log(`You Lose the Match! Final score: ${playerWin} for Player - ${computerWin} for Computer`);
+        final.textContent = 'Computer win the game';
+        final.classList.add('computer-win');
     }
+
+    // Play again possibility
+    const btnReload = document.createElement('button');
+    btnReload.textContent = 'Play Again';
+    btnReload.setAttribute('id', 'reload');
+    btnReload.classList.add('btn-reload');
+
+    reload.appendChild(btnReload);
+
+    btnReload.addEventListener('click', () => {
+        window.location.reload();
+    });
 }
 
 game();
