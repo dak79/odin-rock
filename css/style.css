@@ -16,9 +16,17 @@ body {
     background-color: var(--background-color);
 }
 
-h1 {
+
+h1,
+h2,
+p {
     color: var(--darker-text-color);
     margin-bottom: 1em;
+    text-align: center;
+}
+
+div#title {
+    margin-bottom: -5em;
 }
 
 div#container {
@@ -27,7 +35,7 @@ div#container {
     justify-content: center;
     align-items: center;
     width: auto;
-    height: 70vh;
+    height: 100vh;
 }
 
 div#buttons {
@@ -49,7 +57,7 @@ div#buttons {
 }
 
 div#round {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     padding: 1em;
     color: var(--darker-text-color);
     border: 2px solid var(--border-color);
@@ -58,7 +66,7 @@ div#round {
 }
 
 div#score {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     border: 2px solid var(--border-color);
     padding: 1em;
     color: var(--darker-text-color);
@@ -72,6 +80,12 @@ div#final {
     width: 9em;
     height: 9em;
     background-color: var(--background-color);
+    padding: 1em;
+}
+
+.cpu {
+    margin-bottom: 2em;
+    border: 2px solid var(--border-color);
     padding: 1em;
 }
 

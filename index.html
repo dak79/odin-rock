@@ -10,21 +10,31 @@
     </head>
 
     <body>
+        <div id="title">
+            <h1>Rock Paper Scissor</h1>
+        </div>
         <div id="container">
-            <h1> Choose your play</h1>
+            <h2>You</h2>
 
             <div id="buttons">
                 <button data-play="Rock" class="btn"><img class="rps" src="img/rock.png" alt="rock" /></button>
                 <button data-play="Paper" class="btn"><img class="rps" src="img/paper.png" alt="paper" /></button>
                 <button data-play="Scissor" class="btn"><img class="rps" src="img/scissor.png" alt="scissor" /></button>
             </div>
+            <div id="cpu">
+                <h2>Computer</h2>
+                <img id="cpu-image" src="img/robot.png" alt="cpu plays..." class="rps cpu">
+            </div>
 
             <div id="round">
-                Round: <span id="round-winner"></span>
+                Round <span id="round-count">0</span>: <span id="round-winner"></span>
             </div>
             <div id="score">
                 Score: Player <span id="player-score">0</span> - Computer <span id="computer-score">0</span>
             </div>
+            <p>
+                Who wins 5 rounds, wins the match
+            </p>
             <div id="final"></div>
             <div id="reload"></div>
         </div>

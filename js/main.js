@@ -3,14 +3,18 @@
 * and return that value as a string
 */
 function computerPlay(){
+    const cpuImg = document.querySelector('#cpu-image');
 
     let ranInt = parseInt(Math.random() * 3);
 
     if (ranInt === 0) {
+        cpuImg.setAttribute('src','img/rock.png');
         return 'Rock';
     } else if (ranInt == 1) {
+        cpuImg.setAttribute('src','img/paper.png');
         return 'Paper';
     } else {
+        cpuImg.setAttribute('src','img/scissor.png');
         return 'Scissor';
     }
 }
@@ -63,12 +67,16 @@ function game(){
 
     const playerScore = document.querySelector('#player-score');
     const computerScore = document.querySelector('#computer-score');
+    const roundCount = document.querySelector('#round-count');
+    let roundCounter = 0;
 
     // Play a round with cpu random selection and user selection.
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const computer = computerPlay();
             const winner = playRound(button.dataset.play, computer);
+            roundCounter++;
+            roundCount.textContent = roundCounter;
 
             // Increase the score of winner
             if (winner === 'player') {
@@ -103,10 +111,10 @@ function finalScore(plyScore, cpuScore) {
 
     // Congrats to the winner
     if (plyScore > cpuScore) {
-        final.textContent = 'You win the game';
+        final.textContent = 'You won the game';
         final.classList.add('player-win');
     } else {
-        final.textContent = 'Computer win the game';
+        final.textContent = 'Computer won the game';
         final.classList.add('computer-win');
     }
 
