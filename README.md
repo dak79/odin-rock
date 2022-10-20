@@ -5,7 +5,7 @@
 
 
 ## Description
-This project is part of [The Odin Project - Foundation Course](https://www.theodinproject.com/lessons/foundations-etch-a-sketch).
+This project is part of [The Odin Project - Foundation Course](https://www.theodinproject.com/lessons/foundations-rock-paper-scissors).
 The goal of this web app is to get confident with browser console and some basic JavaScript, expecially with functions, some logic, a bit of DOM manipulation and a bit of event listeners.
 In the first stage the game was without UI and playlable only from console. In the second sage (adding UI) the idea was experimenting with git branches and refactoring old code.
 
